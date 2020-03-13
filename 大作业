@@ -203,3 +203,224 @@ int specific_Date()
 	total = total - birth[2] + curT[2];
 
 }
+int leap_Year(int birth, int cur)
+
+{
+
+	int count = 0;
+
+	while (birth < cur)
+
+	{
+
+		if ((birth % 4 == 0 && birth % 100 != 0) || birth % 400 == 0)
+
+		{
+
+			count++;
+
+		}
+
+		birth++;
+
+	}
+
+	return count;
+
+}
+
+void current_Time()
+
+{
+
+	time_t t;
+
+	struct tm *lt;
+
+	time(&t);
+
+	lt = localtime(&t);
+
+	curT[0] = lt->tm_year + 1900;
+
+	curT[1] = lt->tm_mon;
+
+	curT[2] = lt->tm_yday;
+
+}
+
+void SetPos(int x, int y)
+
+{
+
+	HANDLE winHandle;
+
+	COORD pos = {x, y};
+
+	winHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	SetConsoleCursorPosition(winHandle, pos);
+
+}
+
+void judge(int total)
+
+{
+
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	system("cls");
+
+	printf("Property\t|Count\t|Status\n");
+
+	printf("------------------------------------------------------\n");
+
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_RED);
+
+	switch (total % PHY)
+
+	{
+
+	case 0:
+
+	{
+
+		printf("Physics  \t|0\t|Cycle Day\n");
+
+		break;
+
+	}
+
+	case 1 ... 11:
+
+	{
+
+		printf("Physics  \t|%d\t|On day %2d of the climax day\n", total % PHY, (total % PHY));
+
+		break;
+
+	}
+
+	case 12:
+
+	{
+
+		printf("Physics  \t|12\t|On a critical day\n");
+
+		break;
+
+	}
+
+	default:
+
+	{
+
+		printf("Physics  \t|%d\t|%2d day of low tide\n", total % PHY, total % PHY - 12);
+
+		break;
+
+	}
+
+	}
+
+	printf("------------------------------------------------------\n");
+
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_GREEN);
+
+	switch (total % MOD)
+
+	{
+
+	case 0:
+
+	{
+
+		printf("Emotions\t|0\t|Cycle Day\n");
+
+		break;
+
+	}
+
+	case 1 ... 13:
+
+	{
+
+		printf("Emotions\t|%d\t|On day %2d of the climax day\n", total % MOD, (total % MOD));
+
+		break;
+
+	}
+
+	case 14:
+
+	{
+
+		printf("Emotions\t|14\t|On a critical day\n");
+
+		break;
+
+	}
+
+	default:
+
+	{
+
+		printf("Emotions\t|%d\t|%2d day of low tide\n", total % MOD, total % MOD - 14);
+
+		break;
+
+	}
+
+	}
+
+	printf("------------------------------------------------------\n");
+
+	SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | FOREGROUND_BLUE);
+
+	switch (total % INTE)
+
+	{
+
+	case 0:
+
+	{
+
+		printf("Intellgence\t|0\t|Cycle Day\n");
+
+		break;
+
+	}
+
+	case 1 ... 16:
+
+	{
+
+		printf("Intellgence\t|%d\t|On day %2d of the climax day\n", total % INTE, (total % INTE));
+
+		break;
+
+	}
+
+	case 17:
+
+	{
+
+		printf("Intellgence\t|12\t|On a critical day\n");
+
+		break;
+
+	}
+
+	default:
+
+	{
+
+		printf("Intellgence\t|%d\t|%2d day of low tide\n", total % INTE, total % INTE - 17);
+
+		break;
+
+	}
+
+	}
+
+}
